@@ -1,1 +1,87 @@
-/* You can add global styles to this file, and also import other style files */
+
+$red-primary: (
+    50 : #ffebee,
+    100 : #ffcdd2,
+    200 : #ef9a9a,
+    300 : #e57373,
+    400 : #ef5350,
+    500 : #f44336,
+    600 : #e53935,
+    700 : #d32f2f,
+    800 : #c62828,
+    900 : #b71c1c,
+    A100 : #ff8a80,
+    A200 : #ff5252,
+    A400 : #ff1744,
+    A700 : #d50000,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #ffffff,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+$black-accent: (
+    50 : #f3f3f3,
+    100 : #e2e2e2,
+    200 : #cfcfcf,
+    300 : #bbbbbb,
+    400 : #adadad,
+    500 : #9e9e9e,
+    600 : #969696,
+    700 : #8c8c8c,
+    800 : #828282,
+    900 : #707070,
+    A100 : #fef3f3,
+    A200 : #f9c5c5,
+    A400 : #ff8b8b,
+    A700 : #ff7272,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+
+
+
+@import '~@angular/material/theming';
+@include mat-core();
+
+// Dark Mode
+
+$dark-mode-primary: mat-palette($red-primary);
+$dark-mode-accent:  mat-palette($black-accent, A200, A100, A400);
+$dark-mode-warn:    mat-palette($mat-red);
+
+$dark-mode-theme: mat-light-theme($dark-mode-primary, $dark-mode-accent, $dark-mode-warn);
+
+.dark-theme {
+    @include angular-material-theme($dark-mode-theme);
+}
+
+html, body { height: 100%; }
+body, * { margin: 0; font-family: 'Roboto', sans-serif; }

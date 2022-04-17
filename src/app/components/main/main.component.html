@@ -1,0 +1,68 @@
+
+
+
+<ng-container [ngSwitch]="toggleButtonValue">
+  <ng-template [ngSwitchCase]="'list'">
+    <div class="movies">
+      <div class="movies__background"  *ngFor="let movie of movies" 
+                                  [ngStyle]="{'background-image': 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('+ movie.poster +')'}">
+        <div class="movies__poster-container">
+          <img class="poster" src={{movie.poster}} alt="">
+        </div>
+        <div class="movies__description">
+          <div class="header">
+            <h1 class="movies__title">{{movie.title}}</h1>
+          </div>
+          <div class="details">
+            <p class="movies__info">{{movie.release | date}}</p>
+            <p class="movies__info">{{movie.boxOffice | numRound}}</p>
+          </div>
+        </div>
+      </div>
+      </div>
+  </ng-template>
+
+  <ng-template [ngSwitchDefault] >
+    <div class="movies grid">
+      <div class="movies__background" *ngFor="let movie of movies"
+                                  [ngStyle]="{'background-image': 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('+ movie.poster +')'}">
+        <div class="movies__poster-container">
+          <img class="poster" src={{movie.poster}}>
+        </div>
+        <div class="movies__description">
+          <div class="header">
+            <h1 class="movies__title">{{movie.title}}</h1>
+          </div>
+          <!-- <div class="details">
+            <p class="movies__info">{{movie.release | date}}</p>
+            <p class="movies__info">{{movie.boxOffice | numRound}}</p>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template [ngSwitchCase]="'grid'">
+    <div class="movies grid">
+      <div class="movies__background" *ngFor="let movie of movies" 
+                                  [ngStyle]="{'background-image': 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('+ movie.poster +')'}">
+        <div class="details">
+          <span class="info-icon"><mat-icon>info</mat-icon></span>
+          <div class="info-container">
+            <p class="movies__info">Released: {{movie.release | date}}</p>
+            <p class="movies__info">Box-office: {{movie.boxOffice | numRound}}</p>
+          </div>
+        </div>
+        <div class="movies__poster-container">
+          <img class="poster" src={{movie.poster}} alt="">
+        </div>
+        <div class="movies__description">
+          <div class="header">
+            <h1 class="movies__title">{{movie.title}}</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+</ng-container>
