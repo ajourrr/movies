@@ -1,0 +1,96 @@
+<div class="add" (click)="isFormShown = !isFormShown">
+  <div>
+    <button class="add__button"><mat-icon>add_circle_outline</mat-icon></button>
+  </div>
+</div>
+<div *ngIf="isFormShown" class="form-container">
+  <div [formGroup]="form" class="add__form">
+    <div class="form__title">
+      <h1>Add a new Movie</h1>
+      <button class="close" (click)="isFormShown = !isFormShown">
+        <mat-icon color="accent">clear</mat-icon>
+      </button>
+    </div>
+
+    <div class="form__input">
+      <label for="title">*Title: </label>
+      <input
+        placeholder="Movie title"
+        id="title"
+        type="text"
+        formControlName="title"
+      />
+      <span class="form__invalid" *ngIf="form.errors"
+        >Please, fill in this field!</span
+      >
+    </div>
+
+    <div class="form__input">
+      <label for="poster">Poster:</label>
+      <input
+        placeholder="add Movie poster"
+        class="file-input"
+        (change)="getImage($event)"
+        type="file"
+        name="poster"
+        id="poster"
+      />
+    </div>
+
+    <div class="form__input">
+      <label for="release">*Release: </label>
+      <input
+        placeholder="When it was released"
+        type="date"
+        name="release"
+        id="release"
+        formControlName="release"
+      />
+      <span class="form__invalid" *ngIf="form.errors"
+        >Please, fill in this field!</span
+      >
+    </div>
+
+    <div class="form__input">
+      <label for="box-office">*Box-office:</label>
+      <input
+        placeholder="Box-office worldwide"
+        type="number"
+        id="box-office"
+        name="box-office"
+        formControlName="boxOffice"
+      />
+      <span class="form__invalid" *ngIf="form.errors"
+        >Please, fill in this field!</span
+      >
+    </div>
+
+    <div class="form__input actors">
+      <p>Add actors --></p>
+      <div>
+        <button class="button" (click)="addActor()">
+          <mat-icon>add_circle_outline</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <ng-container formArrayName="actors">
+      <div
+        class="form__input"
+        *ngFor="let _ of getActors.controls; let i = index"
+      >
+        <input type="text" [formControlName]="i" />
+      </div>
+    </ng-container>
+
+    <button
+      class="form__submit"
+      (click)="onSubmit()"
+      reset
+      type="submit"
+      [disabled]="form.invalid"
+    >
+      SUMBIT
+    </button>
+  </div>
+</div>

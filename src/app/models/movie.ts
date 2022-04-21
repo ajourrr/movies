@@ -1,7 +1,9 @@
 export interface Movie {
-    id: number;
+    id: string;
     title: string;
     poster: string;
     release: string;
     boxOffice: number;
+    actors?: string[];
+    creationDate: string;
 }

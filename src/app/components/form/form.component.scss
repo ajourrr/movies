@@ -1,0 +1,132 @@
+.add {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  background-color: rgba(199, 199, 199, 0.329);
+  border: solid 4px rgba(255, 255, 255, 0.466);
+  border-radius: 6px;
+  box-sizing: border-box;
+  width: 200px;
+  height: 300px;
+  cursor: pointer;
+
+  .add__button {
+    display: flex;
+    align-items: center;
+    border: solid 2px rgba(255, 255, 255, 0.466);
+    background-color: rgba(199, 199, 199, 0.8);
+    border-radius: 6px;
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+  }
+
+  &:hover {
+    transition: all 0.5s;
+    transform: scale(1.05, 1.05);
+  }
+}
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+
+  .add__form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 400px;
+    height: fit-content;
+    padding: 40px;
+    background-color: rgb(24, 24, 24);
+    box-shadow: 0 0 10px black;
+    border-radius: 6px;
+    color: #fff;
+
+    .form__title {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+
+      h1 {
+        margin: 0;
+      }
+
+      .close {
+        padding-top: 5px;
+        background-color: transparent;
+        border: none;
+        height: 40px;
+        width: 40px;
+        cursor: pointer;
+      }
+    }
+
+    .form__input {
+      padding: 10px;
+      width: 100%;
+      box-sizing: border-box;
+      input {
+        display: block;
+        padding: 10px;
+        width: 100%;
+        border-radius: 6px;
+        border: none;
+        box-sizing: border-box;
+      }
+      label {
+        color: #fff;
+      }
+
+      .form__invalid {
+        color: red;
+        margin-top: 10px;
+      }
+      .button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: solid 2px rgba(255, 255, 255, 0.466);
+        background-color: rgba(199, 199, 199, 0.8);
+        border-radius: 6px;
+        height: 36px;
+        width: 36px;
+        margin: 0;
+        cursor: pointer;
+      }
+      .file-input {
+        background-color: #fff;
+        border-radius: 4px;
+      }
+    }
+    .actors {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      p {
+        margin: 0;
+      }
+    }
+
+    .form__submit {
+      align-self: center;
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-weight: bold;
+      width: 110px;
+      border-radius: 6px;
+      border: none;
+    }
+  }
+}
