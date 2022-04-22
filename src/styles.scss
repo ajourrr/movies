@@ -72,12 +72,32 @@ $black-accent: (
 @include mat-core();
 
 // Dark Mode
+@function my-dark-theme-foreground (){
+    @return(
+  base:              white,
+  divider:           $light-dividers,
+  dividers:          $light-dividers,
+  disabled:          $light-disabled-text,
+  disabled-button:   rgba(white, 0.3),
+  disabled-text:     $light-disabled-text,
+  elevation:         black,
+  hint-text:         $light-disabled-text,
+  secondary-text:    white,
+  icon:              white,
+  icons:             white,
+  text:              black,
+  slider-min:        white,
+  slider-off:        rgba(white, 0.3),
+  slider-off-active: rgba(white, 0.3),
+)};
+$my-foreground: my-dark-theme-foreground();
+
 
 $dark-mode-primary: mat-palette($red-primary);
 $dark-mode-accent:  mat-palette($black-accent, A200, A100, A400);
 $dark-mode-warn:    mat-palette($mat-red);
-
-$dark-mode-theme: mat-light-theme($dark-mode-primary, $dark-mode-accent, $dark-mode-warn);
+$dark-mode: mat-dark-theme($dark-mode-primary, $dark-mode-accent, $dark-mode-warn);
+$dark-mode-theme: map-merge($dark-mode, (foreground: $my-foreground ));
 
 .dark-theme {
     @include angular-material-theme($dark-mode-theme);

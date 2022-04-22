@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Movie } from 'src/app/models/movie';
 import { MoviesService } from 'src/app/services/movies.service';
 
@@ -9,7 +9,8 @@ import { MoviesService } from 'src/app/services/movies.service';
 })
 export class MainComponent implements OnInit {
   @Input() toggleButtonValue!: string;
-  @Input() formTemplate!: TemplateRef<any>;
+  
+  @ViewChild('template') template!: TemplateRef<any>
 
   movies!: Movie[];
   noImage = '../assets/empty.jpg';
@@ -24,5 +25,6 @@ export class MainComponent implements OnInit {
     this.moviesService
       .getFilms()
       .subscribe((movies: Movie[]) => this.movies = movies);
+
   }
 }
