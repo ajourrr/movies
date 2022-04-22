@@ -4,8 +4,7 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MoviesService } from 'src/app/services/movies.service';
 
 const today = new Date();
-const currentDate =
-  today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+const date = today.getFullYear()+ '-' +  (today.getMonth() + 1) + '-' + today.getDate() ;
 
 @Component({
   selector: 'app-form',
@@ -13,20 +12,20 @@ const currentDate =
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent {
-  form: FormGroup;
   isFormShown = false;
   base64Image!: any;
+  currentDate: string = date;
 
+  form = new FormGroup({
+    id: new FormControl(''),
+    title: new FormControl('', Validators.required),
+    poster: new FormControl(''),
+    creationDate: new FormControl('this.currentDate'),
+    release: new FormControl('', Validators.required),
+    boxOffice: new FormControl('', Validators.required),
+    actors: new FormArray([]),
+  });
   constructor(private moviesService: MoviesService) {
-    this.form = new FormGroup({
-      id: new FormControl(''),
-      title: new FormControl('', Validators.required),
-      poster: new FormControl(''),
-      release: new FormControl('', Validators.required),
-      boxOffice: new FormControl('', Validators.required),
-      actors: new FormArray([]),
-      creationDate: new FormControl(currentDate),
-    });
   }
 
   getImage(event: any) {
@@ -39,12 +38,15 @@ export class FormComponent {
   }
 
   onSubmit() {
+    console.log(this.form.controls)
     const newMovie = {};
     const randomMovieId = (Math.random() + 1).toString(16).slice(2, 6);
     for (let [key, control] of Object.entries(this.form.controls)) {
       switch (key) {
         case 'creationDate':
+          control.patchValue(this.currentDate)
           const dateArr = control.value.split('-');
+          console.log(dateArr)
           const date = new Date(dateArr[2], dateArr[1], dateArr[0]);
           Object.defineProperty(newMovie, key, {
             value: date,
@@ -54,12 +56,6 @@ export class FormComponent {
         case 'poster':
           Object.defineProperty(newMovie, key, {
             value: this.base64Image,
-            writable: true,
-          });
-          break;
-        case 'id':
-          Object.defineProperty(newMovie, key, {
-            value: randomMovieId,
             writable: true,
           });
           break;
