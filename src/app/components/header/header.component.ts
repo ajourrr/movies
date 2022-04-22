@@ -12,13 +12,5 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  ngOnChanges(change: SimpleChanges) {
-    console.log(change['isDarkMode'].currentValue)
-    
-    
-    // localStorage.setItem('isDarkMode', this.isDarkMode.toString())
-    // console.log()
-    // this.isDarkMode = localStorage.getItem('isDarkMode');
-  }
 
 }

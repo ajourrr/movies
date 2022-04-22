@@ -12,8 +12,10 @@ export class MainComponent implements OnInit {
   
   @ViewChild('template') template!: TemplateRef<any>
 
+  searchText = '';
   movies!: Movie[];
   noImage = '../assets/empty.jpg';
+  toggleSortButton = '';
 
   constructor(private moviesService: MoviesService) {}
 
@@ -22,6 +24,7 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.toggleSortButton)
     this.moviesService
       .getFilms()
       .subscribe((movies: Movie[]) => this.movies = movies);

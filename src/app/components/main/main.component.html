@@ -1,9 +1,17 @@
+<mat-toolbar color="accent" class="filters">
+  <mat-button-toggle-group [(ngModel)]="toggleSortButton" class="filters__sort-container">
+    <mat-button-toggle class="sort" value="alphabetical"><mat-icon>sort_by_alpha</mat-icon></mat-button-toggle >
+    <mat-button-toggle class="sort" value="release"><mat-icon>new_releases</mat-icon></mat-button-toggle >
+    <mat-button-toggle class="sort" value="creation"><mat-icon>date_range</mat-icon></mat-button-toggle >
+  </mat-button-toggle-group>
+  <input class="search" type="text" [(ngModel)]="searchText">
+</mat-toolbar >
 <ng-container [ngSwitch]="toggleButtonValue">
   <ng-template [ngSwitchCase]="'list'">
     <div class="movies">
       <div
         class="movies__background"
-        *ngFor="let movie of movies"
+        *ngFor="let movie of movies | searchByTitle: searchText | sortBy: toggleSortButton "
         [ngStyle]="{
           'background-image':
             'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(' +
@@ -31,7 +39,7 @@
     <div class="movies grid">
       <div
         class="movies__background"
-        *ngFor="let movie of movies"
+        *ngFor="let movie of movies | searchByTitle: searchText | sortBy: toggleSortButton "
         [ngStyle]="{
           'background-image':
             'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(' +
@@ -76,7 +84,7 @@
     <div class="movies grid">
       <div
         class="movies__background"
-        *ngFor="let movie of movies"
+        *ngFor="let movie of movies  | searchByTitle: searchText | sortBy: toggleSortButton "
         [ngStyle]="{
           'background-image':
             'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(' +

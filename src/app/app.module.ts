@@ -20,6 +20,8 @@ import { MoviesService } from './services/movies.service';
 import { NumRoundPipe } from './pipes/numRound.pipe';
 import { FormsModule } from '@angular/forms';
 import { FormComponent } from './components/form/form.component';
+import { SearchByTitlePipe } from './pipes/searchByTitle.pipe';
+import { SortByPipe } from './pipes/sortBy.pipe';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { FormComponent } from './components/form/form.component';
     MainComponent,
     FormComponent,
     NumRoundPipe,
+    SearchByTitlePipe,
+    SortByPipe
   ],
   imports: [
     BrowserModule,
