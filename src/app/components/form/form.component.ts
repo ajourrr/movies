@@ -38,6 +38,7 @@ export class FormComponent {
   }
 
   onSubmit() {
+    console.log(this.form.controls)
     const newMovie = {};
     const randomMovieId = (Math.random() + 1).toString(16).slice(2, 6);
     for (let [key, control] of Object.entries(this.form.controls)) {
@@ -45,6 +46,7 @@ export class FormComponent {
         case 'creationDate':
           control.patchValue(this.currentDate)
           const dateArr = control.value.split('-');
+          console.log(dateArr)
           const date = new Date(dateArr[2], dateArr[1], dateArr[0]);
           Object.defineProperty(newMovie, key, {
             value: date,
