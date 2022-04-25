@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Movie } from '../models/movie';
-import { of } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class MoviesService {
   constructor() {
-    const localMovies: any = localStorage.getItem('movies');
-    console.log(localMovies);
+    const localMovies = JSON.parse(localStorage['movies'])
+    if(localMovies){
+      this.movies.next(localMovies) 
+    }
   }
 
   ngOnInit() {}
 
-  movies: Movie[] = [
+  movies: any = new BehaviorSubject([
     {
       id: '1',
       title: 'The Batman',
@@ -32,22 +33,27 @@ export class MoviesService {
       actors: ['Some Guy'],
       creationDate: '2022-3-4',
     },
-  ];
+  ])
+  
+  moviesObs = this.movies.asObservable();
 
-  getFilm(id: string) {
-    return of(this.movies.find((movie) => movie.id === id));
-  }
+  getFilms = () => {
+    return this.moviesObs;
+  };
 
-  getFilms = () => of(this.movies);
-
-  addMovie(movie: any) {
-    this.movies.push(movie);
-    localStorage.setItem('movies', JSON.stringify(this.movies));
-    console.log(JSON.stringify(this.movies))
+  addMovie = (movie: any) => {
+    const movies = [
+      ...this.movies.getValue(),
+      movie
+    ]
+    this.movies.next(movies)
+    localStorage.setItem('movies', JSON.stringify(this.movies.getValue()))
   }
 
   deleteMovie(id: string) {
-    const objIndex = this.movies.findIndex((obj) => obj.id === id);
-    this.movies.splice(objIndex, 1);
+    const movie = this.movies.getValue();
+    const updatedMovies = movie.filter((movie: any) =>  movie.id !== id)
+    this.movies.next(updatedMovies)
+    localStorage.setItem('movies', JSON.stringify(updatedMovies))
   }
 }

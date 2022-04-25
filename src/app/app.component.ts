@@ -1,4 +1,4 @@
-import { Component, OnChanges, SimpleChanges } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +22,6 @@ export class AppComponent {
   changeTheme(){
     this.isDarkMode = !this.isDarkMode
     localStorage.setItem('darkMode', JSON.stringify(this.isDarkMode))
-    console.log(localStorage['darkMode'])
   }
 
   changeDisplayState(state:string){

@@ -22,6 +22,7 @@ import { FormsModule } from '@angular/forms';
 import { FormComponent } from './components/form/form.component';
 import { SearchByTitlePipe } from './pipes/searchByTitle.pipe';
 import { SortByPipe } from './pipes/sortBy.pipe';
+import { FormService } from './services/form.service';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,7 @@ import { SortByPipe } from './pipes/sortBy.pipe';
     ReactiveFormsModule,
     MatCardModule,
   ],
-  providers: [MoviesService],
+  providers: [MoviesService, FormService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

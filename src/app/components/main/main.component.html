@@ -11,17 +11,17 @@
     <div class="movies">
       <div
         class="movies__background"
-        *ngFor="let movie of movies | searchByTitle: searchText | sortBy: toggleSortButton "
+        *ngFor="let movie of movies$  | searchByTitle: searchText | sortBy: toggleSortButton "
         [ngStyle]="{
           'background-image':
             'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(' +
-            movie.poster +
+            (movie.poster || noImage) +
             ')'
         }"
       >
-        <div class="movies__poster-container">
-          <img class="poster" src="{{ movie.poster }}" alt="" />
-        </div>
+      <div class="movies__poster-container">
+        <img class="poster" src="{{ movie.poster || noImage }}" alt="" />
+      </div>
         <div class="movies__description">
           <div class="header">
             <h1 class="movies__title">{{ movie.title }}</h1>
@@ -32,6 +32,11 @@
           </div>
         </div>
       </div>
+      <div class="add" (click)="formService.isFormShown = !formService.isFormShown">
+        <div>
+          <button class="add__button"><mat-icon>add_circle_outline</mat-icon></button>
+        </div>
+      </div>
     </div>
   </ng-template>
 
@@ -39,7 +44,7 @@
     <div class="movies grid">
       <div
         class="movies__background"
-        *ngFor="let movie of movies | searchByTitle: searchText | sortBy: toggleSortButton "
+        *ngFor="let movie of movies$  | searchByTitle: searchText | sortBy: toggleSortButton "
         [ngStyle]="{
           'background-image':
             'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(' +
@@ -76,7 +81,11 @@
           </div>
         </div>
       </div>
-      <ng-content></ng-content>
+      <div class="add" (click)="formService.isFormShown = !formService.isFormShown">
+        <div>
+          <button class="add__button"><mat-icon>add_circle_outline</mat-icon></button>
+        </div>
+      </div>
     </div>
   </ng-template>
 
@@ -84,7 +93,7 @@
     <div class="movies grid">
       <div
         class="movies__background"
-        *ngFor="let movie of movies  | searchByTitle: searchText | sortBy: toggleSortButton "
+        *ngFor="let movie of movies$  | searchByTitle: searchText | sortBy: toggleSortButton "
         [ngStyle]="{
           'background-image':
             'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(' +
@@ -119,6 +128,11 @@
           <div class="header">
             <h1 class="movies__title">{{ movie.title }}</h1>
           </div>
+        </div>
+      </div>
+      <div class="add" (click)="formService.isFormShown = !formService.isFormShown">
+        <div>
+          <button class="add__button"><mat-icon>add_circle_outline</mat-icon></button>
         </div>
       </div>
     </div>

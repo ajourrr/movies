@@ -1,13 +1,13 @@
-<div class="add" (click)="isFormShown = !isFormShown">
+<!-- <div class="add" (click)="isFormShown = !isFormShown">
   <div>
     <button class="add__button"><mat-icon>add_circle_outline</mat-icon></button>
   </div>
-</div>
-<div *ngIf="isFormShown" class="form-container">
+</div> -->
+<div *ngIf="formService.isFormShown" class="form-container">
   <div [formGroup]="form" class="add__form">
     <div class="form__title">
       <h1>Add a new Movie</h1>
-      <button class="close" (click)="isFormShown = !isFormShown">
+      <button class="close" (click)="formService.isFormShown = !formService.isFormShown">
         <mat-icon color="accent">clear</mat-icon>
       </button>
     </div>

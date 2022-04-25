@@ -37,6 +37,38 @@
   margin: 30px 100px;
   padding-bottom: 30px;
 
+  
+  .add {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    background-color: rgba(199, 199, 199, 0.329);
+    border: solid 4px rgba(255, 255, 255, 0.466);
+    border-radius: 6px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100px;
+    cursor: pointer;
+  
+    .add__button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: solid 2px rgba(255, 255, 255, 0.466);
+      background-color: rgba(199, 199, 199, 0.8);
+      border-radius: 6px;
+      height: 40px;
+      width: 100px;
+      cursor: pointer;
+    }
+  
+    &:hover {
+      transition: all 0.5s;
+      transform: scale(1.05, 1.05);
+    }
+  }
+
   &__background {
     display: flex;
     align-items: center;
@@ -113,7 +145,22 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: min-content;
+  grid-gap: 20px;
   height: 100vh;
+
+  .add { 
+    width: 200px;
+    height: 300px;
+  
+    .add__button {
+      width: 40px;
+    }
+  
+    &:hover {
+      transition: all 0.5s;
+      transform: scale(1.05, 1.05);
+    }
+  }
 
   .movies__background {
     display: flex;
@@ -121,17 +168,17 @@
     align-self: center;
     flex-direction: column;
     width: 200px;
+    margin-bottom: 0;
     position: relative;
 
     .movies__poster-container {
       width: unset;
       height: fit-content;
       margin-left: 0;
-      background-color: rgba(199, 199, 199, 0.247);
-
       border-radius: 3px;
+      background-color: rgba(199, 199, 199, 0.705);
     }
-
+   
     .details {
       flex: none;
       display: flex;
@@ -200,14 +247,7 @@
       }
     }
 
-    .movies__poster-container {
-      background-color: rgba(199, 199, 199, 0.705);
-
-      .poster {
-        display: block;
-        width: 100%;
-      }
-    }
+    
     .movies__empty-poster {
       display: block;
       width: 130px;
@@ -223,7 +263,6 @@
 @media only screen and (max-width: 1115px) {
   .grid {
     grid-template-columns: 1fr 1fr 1fr;
-    height: 100vh;
   }
 }
 @media only screen and (max-width: 900px) {

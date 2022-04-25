@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { Movie } from 'src/app/models/movie';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { FormService } from 'src/app/services/form.service';
 import { MoviesService } from 'src/app/services/movies.service';
 
 @Component({
@@ -9,25 +9,21 @@ import { MoviesService } from 'src/app/services/movies.service';
 })
 export class MainComponent implements OnInit {
   @Input() toggleButtonValue!: string;
-  
-  @ViewChild('template') template!: TemplateRef<any>
 
   searchText = '';
-  movies!: Movie[];
+  movies$!: any;
   noImage = '../assets/empty.jpg';
   toggleSortButton = '';
 
-  constructor(private moviesService: MoviesService) {}
+  constructor(private moviesService: MoviesService, public formService: FormService, private cdr: ChangeDetectorRef) {
+    this.moviesService.getFilms().subscribe( (mov: any) => {
+      this.movies$ = mov;
+    })
+  }
 
   deleteMovie(id: string) {
     this.moviesService.deleteMovie(id);
   }
 
-  ngOnInit() {
-    console.log(this.toggleSortButton)
-    this.moviesService
-      .getFilms()
-      .subscribe((movies: Movie[]) => this.movies = movies);
-
-  }
+  ngOnInit() {}
 }
