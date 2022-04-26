@@ -4,7 +4,6 @@ import { FormService } from 'src/app/services/form.service';
 
 import { MoviesService } from 'src/app/services/movies.service';
 
-
 const randomMovieId = (Math.random() + 1).toString(16).slice(2, 6);
 @Component({
   selector: 'app-form',
@@ -14,7 +13,6 @@ const randomMovieId = (Math.random() + 1).toString(16).slice(2, 6);
 export class FormComponent {
   base64Image!: any;
 
-
   form = new FormGroup({
     id: new FormControl(randomMovieId),
     title: new FormControl('', Validators.required),
@@ -23,9 +21,12 @@ export class FormComponent {
     release: new FormControl('', Validators.required),
     boxOffice: new FormControl('', Validators.required),
     actors: new FormArray([]),
+    isFavorite: new FormControl(false),
   });
-  constructor(private moviesService: MoviesService, public formService: FormService) {
-  }
+  constructor(
+    private moviesService: MoviesService,
+    public formService: FormService
+  ) {}
 
   getImage(event: any) {
     const file = event.target.files[0];
@@ -37,7 +38,6 @@ export class FormComponent {
   }
 
   onSubmit() {
-    
     const newMovie = {
       id: this.getFormControls['id'].value,
       title: this.getFormControls['title'].value,
@@ -46,6 +46,7 @@ export class FormComponent {
       boxOffice: this.getFormControls['boxOffice'].value,
       actors: this.getFormControls['actors'].value,
       creationDate: this.getFormControls['creationDate'].value,
+      isFavorite: this.getFormControls['isFavorite'].value,
     };
     this.formService.isFormShown = false;
     this.moviesService.addMovie(newMovie);
@@ -55,8 +56,8 @@ export class FormComponent {
   get getActors() {
     return this.form.get('actors') as FormArray;
   }
-  get getFormControls () {
-    return this.form.controls
+  get getFormControls() {
+    return this.form.controls;
   }
   addActor() {
     this.getActors.push(new FormControl(null));

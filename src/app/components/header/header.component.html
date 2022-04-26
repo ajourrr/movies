@@ -2,6 +2,25 @@
   <div class="header__container">
     <h1 class="mat-display-1">Netflex</h1>
     <ng-content select="[toggle]"></ng-content>
+    <div class="pages">
+      <a
+        mat-flat-button
+        color="accent"
+        class="pages__home"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        [routerLink]="'main'"
+        >Home</a
+      >
+      <a
+        mat-flat-button
+        color="accent"
+        class="pages__favs"
+        routerLinkActive="active"
+        [routerLink]="'favorites'"
+        >Favourites</a
+      >
+    </div>
   </div>
   <ng-content select="[toggleButtons]"></ng-content>
 </mat-toolbar>

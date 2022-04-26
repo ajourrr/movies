@@ -1,17 +1,32 @@
 <mat-toolbar color="accent" class="filters">
-  <mat-button-toggle-group [(ngModel)]="toggleSortButton" class="filters__sort-container">
-    <mat-button-toggle class="sort" value="alphabetical"><mat-icon>sort_by_alpha</mat-icon></mat-button-toggle >
-    <mat-button-toggle class="sort" value="release"><mat-icon>new_releases</mat-icon></mat-button-toggle >
-    <mat-button-toggle class="sort" value="creation"><mat-icon>date_range</mat-icon></mat-button-toggle >
+  <mat-button-toggle-group
+    [(ngModel)]="toggleSortButton"
+    (ngModelChange)="toggleSort()"
+    class="filters__sort-container"
+  >
+    <mat-button-toggle class="sort" value="alphabetical"
+      ><mat-icon>sort_by_alpha</mat-icon></mat-button-toggle
+    >
+    <mat-button-toggle class="sort" value="release"
+      ><mat-icon>new_releases</mat-icon></mat-button-toggle
+    >
+    <mat-button-toggle class="sort" value="creation"
+      ><mat-icon>date_range</mat-icon></mat-button-toggle
+    >
   </mat-button-toggle-group>
-  <input class="search" type="text" [(ngModel)]="searchText">
-</mat-toolbar >
-<ng-container [ngSwitch]="toggleButtonValue">
+  <input class="search" type="text" [(ngModel)]="searchText" />
+</mat-toolbar>
+<ng-container [ngSwitch]="viewDisplayS.toggleButtonValue">
   <ng-template [ngSwitchCase]="'list'">
     <div class="movies">
       <div
         class="movies__background"
-        *ngFor="let movie of movies$  | searchByTitle: searchText | sortBy: toggleSortButton "
+        *ngFor="
+          let movie of movies$
+            | async
+            | searchByTitle: searchText
+            | sortBy: toggleSortButton
+        "
         [ngStyle]="{
           'background-image':
             'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(' +
@@ -19,9 +34,9 @@
             ')'
         }"
       >
-      <div class="movies__poster-container">
-        <img class="poster" src="{{ movie.poster || noImage }}" alt="" />
-      </div>
+        <div class="movies__poster-container">
+          <img class="poster" src="{{ movie.poster || noImage }}" alt="" />
+        </div>
         <div class="movies__description">
           <div class="header">
             <h1 class="movies__title">{{ movie.title }}</h1>
@@ -31,10 +46,34 @@
             <p class="movies__info">{{ movie.boxOffice | numRound }}</p>
           </div>
         </div>
+        <div class="buttons">
+          <div class="info-icon"><mat-icon>info</mat-icon></div>
+          <div class="delete-icon" (click)="deleteMovie(movie.id)">
+            <mat-icon>delete</mat-icon>
+          </div>
+          <div class="favs-icon">
+            <label class="favs-control">
+              <input
+                [checked]="movie.isFavorite"
+                (change)="toggleFavorite($event, movie.id)"
+                class="favs-input"
+                type="checkbox"
+              />
+              <mat-icon class="fav">{{
+                movie.isFavorite ? "favorite" : "favorite_border"
+              }}</mat-icon>
+            </label>
+          </div>
+        </div>
       </div>
-      <div class="add" (click)="formService.isFormShown = !formService.isFormShown">
+      <div
+        class="add"
+        (click)="formService.isFormShown = !formService.isFormShown"
+      >
         <div>
-          <button class="add__button"><mat-icon>add_circle_outline</mat-icon></button>
+          <button class="add__button">
+            <mat-icon>add_circle_outline</mat-icon>
+          </button>
         </div>
       </div>
     </div>
@@ -44,7 +83,12 @@
     <div class="movies grid">
       <div
         class="movies__background"
-        *ngFor="let movie of movies$  | searchByTitle: searchText | sortBy: toggleSortButton "
+        *ngFor="
+          let movie of movies$
+            | async
+            | searchByTitle: searchText
+            | sortBy: toggleSortButton
+        "
         [ngStyle]="{
           'background-image':
             'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(' +
@@ -71,6 +115,19 @@
           <div class="delete-icon" (click)="deleteMovie(movie.id)">
             <mat-icon>delete</mat-icon>
           </div>
+          <div class="favs-icon">
+            <label class="favs-control">
+              <input
+                [checked]="movie.isFavorite"
+                (change)="toggleFavorite($event, movie.id)"
+                class="favs-input"
+                type="checkbox"
+              />
+              <mat-icon class="fav">{{
+                movie.isFavorite ? "favorite" : "favorite_border"
+              }}</mat-icon>
+            </label>
+          </div>
         </div>
         <div class="movies__poster-container">
           <img class="poster" src="{{ movie.poster || noImage }}" alt="" />
@@ -81,9 +138,14 @@
           </div>
         </div>
       </div>
-      <div class="add" (click)="formService.isFormShown = !formService.isFormShown">
+      <div
+        class="add"
+        (click)="formService.isFormShown = !formService.isFormShown"
+      >
         <div>
-          <button class="add__button"><mat-icon>add_circle_outline</mat-icon></button>
+          <button class="add__button">
+            <mat-icon>add_circle_outline</mat-icon>
+          </button>
         </div>
       </div>
     </div>
@@ -93,7 +155,12 @@
     <div class="movies grid">
       <div
         class="movies__background"
-        *ngFor="let movie of movies$  | searchByTitle: searchText | sortBy: toggleSortButton "
+        *ngFor="
+          let movie of movies$
+            | async
+            | searchByTitle: searchText
+            | sortBy: toggleSortButton
+        "
         [ngStyle]="{
           'background-image':
             'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(' +
@@ -120,6 +187,19 @@
           <div class="delete-icon" (click)="deleteMovie(movie.id)">
             <mat-icon>delete</mat-icon>
           </div>
+          <div class="favs-icon">
+            <label class="favs-control">
+              <input
+                [checked]="movie.isFavorite"
+                (change)="toggleFavorite($event, movie.id)"
+                class="favs-input"
+                type="checkbox"
+              />
+              <mat-icon class="fav">{{
+                movie.isFavorite ? "favorite" : "favorite_border"
+              }}</mat-icon>
+            </label>
+          </div>
         </div>
         <div class="movies__poster-container">
           <img class="poster" src="{{ movie.poster || noImage }}" alt="" />
@@ -130,9 +210,14 @@
           </div>
         </div>
       </div>
-      <div class="add" (click)="formService.isFormShown = !formService.isFormShown">
+      <div
+        class="add"
+        (click)="formService.isFormShown = !formService.isFormShown"
+      >
         <div>
-          <button class="add__button"><mat-icon>add_circle_outline</mat-icon></button>
+          <button class="add__button">
+            <mat-icon>add_circle_outline</mat-icon>
+          </button>
         </div>
       </div>
     </div>

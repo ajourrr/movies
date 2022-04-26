@@ -1,12 +1,12 @@
 <div [ngClass]="{'dark-theme': isDarkMode, 'mat-app-background': isDarkMode}">
     <app-header>
         <mat-slide-toggle toggle [checked]="isDarkMode" (change)="changeTheme()">Dark Mode</mat-slide-toggle>
-        <mat-button-toggle-group toggleButtons (ngModelChange)="changeDisplayState($event)" [(ngModel)]="toggleButtonValue">
+        <mat-button-toggle-group toggleButtons (ngModelChange)="changeDisplayState($event)" [(ngModel)]="viewDisplayS.toggleButtonValue">
             <mat-button-toggle value="list"><mat-icon>view_list</mat-icon></mat-button-toggle>
             <mat-button-toggle value="grid"><mat-icon>view_module</mat-icon></mat-button-toggle>
         </mat-button-toggle-group>
     </app-header>
-    <app-main [toggleButtonValue]="toggleButtonValue"> </app-main>
-    <app-form #form></app-form>
+    <router-outlet></router-outlet>
+    <app-form></app-form>
     
 </div>

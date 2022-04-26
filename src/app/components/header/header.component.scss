@@ -1,16 +1,30 @@
 .mat-display-1 {
-    margin: 0px;
-    font-weight: bold;
+  margin: 0px;
+  font-weight: bold;
 }
 .toolbar {
-    display: flex;
-    justify-content: space-between;
-    box-shadow: 0 0 5px black;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 0 5px black;
 
-    .header__container {
-        width: 300px;
-        display: flex;
-        align-items: center;
-        justify-content: space-evenly;
+  .header__container {
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .pages {
+      margin-left: 10px;
+      &__favs {
+        margin-left: 10px;
+      }
+      &__home,
+      &__favs {
+        width: 100px;
+      }
+      .active {
+        box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.267);
+      }
     }
+  }
 }

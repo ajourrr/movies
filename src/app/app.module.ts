@@ -9,6 +9,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
@@ -23,6 +24,7 @@ import { FormComponent } from './components/form/form.component';
 import { SearchByTitlePipe } from './pipes/searchByTitle.pipe';
 import { SortByPipe } from './pipes/sortBy.pipe';
 import { FormService } from './services/form.service';
+import { ViewDisplayService } from './services/viewDisplay.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,7 @@ import { FormService } from './services/form.service';
     FormComponent,
     NumRoundPipe,
     SearchByTitlePipe,
-    SortByPipe
+    SortByPipe,
   ],
   imports: [
     BrowserModule,
@@ -48,8 +50,9 @@ import { FormService } from './services/form.service';
     MatGridListModule,
     ReactiveFormsModule,
     MatCardModule,
+    MatButtonModule,
   ],
-  providers: [MoviesService, FormService],
+  providers: [MoviesService, FormService, ViewDisplayService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
